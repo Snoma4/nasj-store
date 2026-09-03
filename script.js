@@ -7,8 +7,8 @@ const PRODUCTS = [
     name: "فاصل زهرة صوفية",
     description: "فاصل كتاب صوفي",
     price: null,
-    image: "product-1.jpg",
-    detailImage: "product-1-detail.jpg"
+    image: "https://raw.githubusercontent.com/Snoma4/nasj-store/main/product-1.jpg",
+    detailImage: "https://raw.githubusercontent.com/Snoma4/nasj-store/main/product-1-detail.jpg"
   }
 ];
 
@@ -45,7 +45,6 @@ function renderCategoryButtons() {
   ];
 
   const holder = $("#categoryFilters");
-
   if (!holder) return;
 
   holder.innerHTML = categories.map(category => `
@@ -65,22 +64,11 @@ function setCategory(category) {
 
 function renderProducts() {
   const grid = $("#productsGrid");
-
   if (!grid) return;
 
-  const visible =
-    activeCategory === "الكل"
-      ? PRODUCTS
-      : PRODUCTS.filter(p => p.category === activeCategory);
-
-  if (!visible.length) {
-    grid.innerHTML = `
-      <div class="empty-cart">
-        لا توجد منتجات في هذا القسم حاليًا 🧶
-      </div>
-    `;
-    return;
-  }
+  const visible = activeCategory === "الكل"
+    ? PRODUCTS
+    : PRODUCTS.filter(p => p.category === activeCategory);
 
   grid.innerHTML = visible.map(p => `
     <article class="product-card">
@@ -90,17 +78,12 @@ function renderProducts() {
 
       <div class="product-info">
         <span class="product-category">${p.category}</span>
-
         <h3>${p.name}</h3>
-
         <p>${p.description}</p>
 
         <div class="product-bottom">
           <span class="price">${money(p.price)}</span>
-
-          <button
-            class="add-btn"
-            onclick="addToCart(${p.id})">
+          <button class="add-btn" onclick="addToCart(${p.id})">
             أضيفي للسلة 🛒
           </button>
         </div>
@@ -112,14 +95,8 @@ function renderProducts() {
 function addToCart(id) {
   const item = state.cart.find(x => x.id === id);
 
-  if (item) {
-    item.qty++;
-  } else {
-    state.cart.push({
-      id: id,
-      qty: 1
-    });
-  }
+  if (item) item.qty++;
+  else state.cart.push({ id, qty: 1 });
 
   saveCart();
   renderCart();
@@ -128,7 +105,6 @@ function addToCart(id) {
 
 function changeQty(id, amount) {
   const item = state.cart.find(x => x.id === id);
-
   if (!item) return;
 
   item.qty += amount;
@@ -143,25 +119,18 @@ function changeQty(id, amount) {
 
 function removeItem(id) {
   state.cart = state.cart.filter(x => x.id !== id);
-
   saveCart();
   renderCart();
 }
 
 function renderCart() {
-  const count = state.cart.reduce(
-    (sum, item) => sum + item.qty,
-    0
-  );
+  const count = state.cart.reduce((sum, item) => sum + item.qty, 0);
 
-  const cartCount = $("#cartCount");
-
-  if (cartCount) {
-    cartCount.textContent = count;
+  if ($("#cartCount")) {
+    $("#cartCount").textContent = count;
   }
 
   const container = $("#cartItems");
-
   if (!container) return;
 
   if (!state.cart.length) {
@@ -182,10 +151,7 @@ function renderCart() {
 
           <div>
             <h4>${p.name}</h4>
-
-            <div class="item-price">
-              ${money(p.price)}
-            </div>
+            <div class="item-price">${money(p.price)}</div>
 
             <div class="qty">
               <button onclick="changeQty(${p.id}, 1)">+</button>
@@ -194,9 +160,7 @@ function renderCart() {
             </div>
           </div>
 
-          <button
-            class="remove"
-            onclick="removeItem(${p.id})">
+          <button class="remove" onclick="removeItem(${p.id})">
             حذف
           </button>
         </div>
@@ -204,23 +168,13 @@ function renderCart() {
     }).join("");
   }
 
-  const allPriced =
-    state.cart.length > 0 &&
-    state.cart.every(item => {
-      const p = productById(item.id);
-      return p && p.price != null;
-    });
-
   const total = state.cart.reduce((sum, item) => {
     const p = productById(item.id);
     return sum + (p.price || 0) * item.qty;
   }, 0);
 
-  const totalElement = $("#cartTotal");
-
-  if (totalElement) {
-    totalElement.textContent =
-      allPriced ? `${total} ريال` : "يُحدد";
+  if ($("#cartTotal")) {
+    $("#cartTotal").textContent = "يُحدد";
   }
 
   const lines = state.cart.map(item => {
@@ -233,89 +187,52 @@ function renderCart() {
 أرغب بطلب:
 ${lines.join("\n")}
 
-الإجمالي: ${allPriced ? total + " ريال" : "يُحدد"}
+الإجمالي: يُحدد
 الاستلام: من المدرسة`
     : "مرحبًا نَسْج 🧶 أرغب بالاستفسار عن المنتجات.";
 
-  const cartWhatsapp = $("#cartWhatsapp");
-
-  if (cartWhatsapp) {
-    cartWhatsapp.href = whatsappLink(message);
+  if ($("#cartWhatsapp")) {
+    $("#cartWhatsapp").href = whatsappLink(message);
   }
 
-  const heroWhatsapp = $("#heroWhatsapp");
-
-  if (heroWhatsapp) {
-    heroWhatsapp.href = whatsappLink(
+  if ($("#heroWhatsapp")) {
+    $("#heroWhatsapp").href = whatsappLink(
       "مرحبًا نَسْج 🧶 أرغب بالاستفسار عن المنتجات."
     );
   }
 
-  const customWhatsapp = $("#customWhatsapp");
-
-  if (customWhatsapp) {
-    customWhatsapp.href = whatsappLink(
-      "مرحبًا نَسْج 🧶 أرغب بطلب تصميم خاص. فكرتي هي: "
+  if ($("#customWhatsapp")) {
+    $("#customWhatsapp").href = whatsappLink(
+      "مرحبًا نَسْج 🧶 أرغب بطلب تصميم خاص."
     );
   }
 }
 
 function openCart() {
-  const drawer = $("#cartDrawer");
-  const overlay = $("#overlay");
+  $("#cartDrawer")?.classList.add("open");
 
-  if (drawer) {
-    drawer.classList.add("open");
-    drawer.setAttribute("aria-hidden", "false");
+  if ($("#overlay")) {
+    $("#overlay").hidden = false;
   }
-
-  if (overlay) {
-    overlay.hidden = false;
-  }
-
-  document.body.style.overflow = "hidden";
 }
 
 function closeCart() {
-  const drawer = $("#cartDrawer");
-  const overlay = $("#overlay");
+  $("#cartDrawer")?.classList.remove("open");
 
-  if (drawer) {
-    drawer.classList.remove("open");
-    drawer.setAttribute("aria-hidden", "true");
+  if ($("#overlay")) {
+    $("#overlay").hidden = true;
   }
-
-  if (overlay) {
-    overlay.hidden = true;
-  }
-
-  document.body.style.overflow = "";
 }
 
-const openCartButton = $("#openCart");
-const closeCartButton = $("#closeCart");
-const overlay = $("#overlay");
-const clearCartButton = $("#clearCart");
+$("#openCart")?.addEventListener("click", openCart);
+$("#closeCart")?.addEventListener("click", closeCart);
+$("#overlay")?.addEventListener("click", closeCart);
 
-if (openCartButton) {
-  openCartButton.addEventListener("click", openCart);
-}
-
-if (closeCartButton) {
-  closeCartButton.addEventListener("click", closeCart);
-}
-
-if (overlay) {
-  overlay.addEventListener("click", closeCart);
-}
-
-if (clearCartButton) {
-  clearCartButton.addEventListener("click", () => {
-    state.cart = [];
-    saveCart();
-    renderCart();
-  });
-}
+$("#clearCart")?.addEventListener("click", () => {
+  state.cart = [];
+  saveCart();
+  renderCart();
+});
 
 renderCategoryButtons();
 renderProducts();
