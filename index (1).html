@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7dce7">
+  <meta name="description" content="نَسْج — منسوجات صوفية بسيطة ولطيفة مصنوعة بحب.">
+  <title>نَسْج | خيوطٌ تُنسج، وبهجةٌ تُهدى.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playpen+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="نَسْج">
+      <span class="brand-mark">🧶</span>
+      <span>
+        <strong>نَسْج</strong>
+        <small>من خيطٍ صغير… شيءٌ جميل</small>
+      </span>
+    </a>
+
+    <button class="cart-button" id="openCart" aria-label="فتح السلة">
+      <span>🛒</span>
+      <span>السلة</span>
+      <b id="cartCount">0</b>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-deco deco-one">✿</div>
+      <div class="hero-deco deco-two">♡</div>
+      <div class="hero-copy">
+        <span class="eyebrow">مصنوع يدويًا بحب ♡</span>
+        <h1>خيوطٌ تُنسج،<br><em>وبهجةٌ تُهدى.</em></h1>
+        <p>قطع صوفية بسيطة وظريفة، ننسجها لتصير هدية صغيرة تحمل معنى كبيرًا.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#products">تصفحي المنتجات ✿</a>
+          <a class="ghost-btn" id="heroWhatsapp" href="#" target="_blank" rel="noopener">تواصلي معنا 💬</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="yarn-ball">🧶</div>
+        <span>✿</span><span>♡</span><span>✦</span>
+      </div>
+    </section>
+
+    <section class="notice">
+      <div class="notice-icon">🎒</div>
+      <div>
+        <strong>الاستلام من المدرسة</strong>
+        <p>بعد تأكيد الطلب عبر واتساب، يكون الاستلام من المدرسة.</p>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">اختاري قطعتك</span>
+          <h2>منتجات نَسْج</h2>
+        </div>
+        <span class="tiny-note">صُنعت بحب 🧶</span>
+      </div>
+
+      <div class="category-filters" id="categoryFilters" aria-label="تصنيفات المنتجات"></div>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <section class="custom-order">
+      <div class="custom-sparkles">✦ ✿ ♡</div>
+      <span class="eyebrow">فكرة في بالك؟</span>
+      <h2>لم تجدي ما تبحثين عنه؟</h2>
+      <p>قولي لنا فكرتك أو اللون أو الشكل الذي تتمنينه، ونحاول ننسج لكِ تصميمًا خاصًا.</p>
+      <a class="primary-btn" id="customWhatsapp" href="#" target="_blank" rel="noopener">اطلبي تصميمًا خاصًا 💬</a>
+    </section>
+
+    <section class="how">
+      <span class="eyebrow">بكل بساطة</span>
+      <h2>كيف تطلبين؟</h2>
+      <div class="steps">
+        <div class="step"><b>01</b><span>اختاري المنتجات</span><small>أضيفي ما يعجبكِ إلى السلة.</small></div>
+        <div class="step"><b>02</b><span>أرسلي الطلب</span><small>اضغطي «اطلبي عبر واتساب».</small></div>
+        <div class="step"><b>03</b><span>استلمي طلبكِ</span><small>الاستلام من المدرسة بعد التأكيد.</small></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>نَسْج 🧶</strong>
+      <p>خيوطٌ تُنسج، وبهجةٌ تُهدى.</p>
+    </div>
+    <span>صُنع بحب ♡</span>
+  </footer>
+
+  <div class="overlay" id="overlay" hidden></div>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="سلة المشتريات" aria-hidden="true">
+    <div class="cart-head">
+      <div>
+        <span class="eyebrow">اختياراتك</span>
+        <h2>سلة المشتريات 🛒</h2>
+      </div>
+      <button class="close-btn" id="closeCart" aria-label="إغلاق">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <div class="empty-cart">
+        <div>🧶</div>
+        <strong>السلة فاضية حاليًا</strong>
+        <p>اختاري قطعة لطيفة وبتظهر هنا ♡</p>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="total-row"><span>الإجمالي</span><strong id="cartTotal">يُحدد</strong></div>
+      <a class="whatsapp-order" id="cartWhatsapp" href="#" target="_blank" rel="noopener">اطلبي عبر واتساب 💬</a>
+      <button class="clear-cart" id="clearCart">تفريغ السلة</button>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
